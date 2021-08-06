@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  minio:
+    command: server /data
+    image: minio/minio
+    networks:
+    - default
+    ports:
+    - "9000:9000"
+
+  node:
+    build: ./node
+    image: node:node20
+    networks:
+    - default
+    ports:
+    - "5150:5150"
+
+  openalpr:
+    build: ./openalpr
+    image: openalpr:openaplr16
+    networks:
+    - default
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    networks:
+    - default
+    ports:
+    - "15672:15672"
+
